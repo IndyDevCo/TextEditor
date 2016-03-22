@@ -8,12 +8,12 @@ import java.io.*;
  
 public class TextEditor extends JFrame implements ActionListener {
   private TextArea textArea = new TextArea("", 0,0, TextArea.SCROLLBARS_VERTICAL_ONLY);
-  private MenuBar menuBar = new MenuBar(); // first, create a MenuBar item
-	private Menu file = new Menu(); // our File menu
+  private OptionBar OptionBar = new OptionBar(); // first, create a OptionBar item
+	private Option file = new Option(); // our File Option
 	// what's going in File? let's see...
-	private MenuItem openFile = new MenuItem();  // an open option
-	private MenuItem saveFile = new MenuItem(); // a save option
-	private MenuItem close = new MenuItem(); // and a close option!
+	private OptionItem openFile = new OptionItem();  // an open option
+	private OptionItem saveFile = new OptionItem(); // a save option
+	private OptionItem close = new OptionItem(); // and a close option!
  
 	public TextEditor() {
 		this.setSize(500, 300); // set the initial size of the window
@@ -24,30 +24,30 @@ public class TextEditor extends JFrame implements ActionListener {
 		this.getContentPane().setLayout(new BorderLayout()); // the BorderLayout bit makes it fill it automatically
 		this.getContentPane().add(textArea);
  
-		// add our menu bar into the GUI
-		this.setMenuBar(this.menuBar);
-		this.menuBar.add(this.file); // we'll configure this later
+		// add our Option bar into the GUI
+		this.setOptionBar(this.OptionBar);
+		this.OptionBar.add(this.file); // we'll configure this later
  
-		// first off, the design of the menuBar itself. Pretty simple, all we need to do
-		// is add a couple of menus, which will be populated later on
+		// first off, the design of the OptionBar itself. Pretty simple, all we need to do
+		// is add a couple of Options, which will be populated later on
 		this.file.setLabel("File");
  
-		// now it's time to work with the menu. I'm only going to add a basic File menu
+		// now it's time to work with the Option. I'm only going to add a basic File Option
 		// but you could add more!
  
-		// now we can start working on the content of the menu~ this gets a little repetitive,
+		// now we can start working on the content of the Option~ this gets a little repetitive,
 		// so please bare with me!
  
 		// time for the repetitive stuff. let's add the "Open" option
-		this.openFile.setLabel("Open"); // set the label of the menu item
+		this.openFile.setLabel("Open"); // set the label of the Option item
 		this.openFile.addActionListener(this); // add an action listener (so we know when it's been clicked
-		this.openFile.setShortcut(new MenuShortcut(KeyEvent.VK_O, false)); // set a keyboard shortcut
-		this.file.add(this.openFile); // add it to the "File" menu
+		this.openFile.setShortcut(new OptionShortcut(KeyEvent.VK_O, false)); // set a keyboard shortcut
+		this.file.add(this.openFile); // add it to the "File" Option
  
 		// and the save...
 		this.saveFile.setLabel("Save");
 		this.saveFile.addActionListener(this);
-		this.saveFile.setShortcut(new MenuShortcut(KeyEvent.VK_S, false));
+		this.saveFile.setShortcut(new OptionShortcut(KeyEvent.VK_S, false));
 		this.file.add(this.saveFile);
  
 		// and finally, the close option
@@ -57,7 +57,7 @@ public class TextEditor extends JFrame implements ActionListener {
 		// this means that we actually have TWO shortcuts to close:
 		// 1) the default close operation (example, Alt+F4 on Windows)
 		// 2) CTRL+F4, which we are about to define now: (this one will appear in the label)
-		this.close.setShortcut(new MenuShortcut(KeyEvent.VK_F4, false));
+		this.close.setShortcut(new OptionShortcut(KeyEvent.VK_F4, false));
 		this.close.addActionListener(this);
 		this.file.add(this.close);
 	}
